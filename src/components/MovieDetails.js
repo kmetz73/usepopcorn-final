@@ -34,6 +34,10 @@ export default function MovieDetails({
     Genre: genre,
   } = movie;
 
+  const isTop = imdbRating > 8;
+
+  const [averageRating, setAverageRating] = useState(0);
+
   function handleAdd() {
     const newWatchedMovie = {
       imdbID: selectedId,
@@ -46,7 +50,10 @@ export default function MovieDetails({
     };
 
     onAddToWatched(newWatchedMovie);
-    onCloseMovie();
+    // onCloseMovie();
+
+    // setAverageRating(Number(averageRating));
+    // setAverageRating((averageRating) => (averageRating + userRating) / 2);
   }
   //  to  use a keystroke  to  close  the  movie details
   useEffect(

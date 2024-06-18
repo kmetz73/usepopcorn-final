@@ -1,29 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { useKey } from "./useKey";
 
 export default function Search({ query, setQuery }) {
   const inputEl = useRef(null);
 
-  useEffect(
-    function () {
-      function callback(e) {
-        if (document.activeElement === inputEl.current) return;
-
-        if (e.key === "Enter") {
-          inputEl.current.focus();
-          setQuery("");
-        }
-      }
-
-      document.addEventListener("keydown", callback);
-      return () => document.addEventListener("keydown", callback);
-    },
-    [setQuery]
-  );
-
-  // useEffect(function () {
-  //   const el = document.querySelector(".search");
-  //   el.focus();
-  // }, []);
+  useKey("Enter", function () {
+    inputEl.current.focus();
+    setQuery("");
+  });
 
   return (
     <input

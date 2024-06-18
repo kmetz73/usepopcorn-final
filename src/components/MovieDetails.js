@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import StarRating from "./StarRating";
 import Loader from "./Loader";
+import { useKey } from "./useKey";
 
 const KEY = "d5028703";
 
@@ -65,22 +66,7 @@ export default function MovieDetails({
     // setAverageRating((averageRating) => (averageRating + userRating) / 2);
   }
   //  to  use a keystroke  to  close  the  movie details
-  useEffect(
-    function () {
-      function callback(e) {
-        if (e.key === "Escape") {
-          onCloseMovie();
-        }
-      }
-
-      document.addEventListener("keydown", callback);
-
-      return function () {
-        document.removeEventListener("keydown", callback);
-      };
-    },
-    [onCloseMovie]
-  );
+  useKey("Escape", onCloseMovie);
 
   useEffect(
     function () {
